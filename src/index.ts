@@ -11,8 +11,7 @@ class Seaman extends Command {
     // flag with a value (-n, --name=VALUE)
     name: flags.string({ char: 'n', description: 'name to print' }),
     // flag with no value (-f, --force)
-    force: flags.boolean({ char: 'f' }),
-    migrate: flags.boolean({ char: 'm' })
+    force: flags.boolean({ char: 'f' })
   }
 
   static args = [{ name: 'migrate' }]
@@ -20,7 +19,7 @@ class Seaman extends Command {
   async run () {
     const { args, flags } = this.parse(Seaman)
     if (args.migrate) {
-      const migrate = new Migrate(this)
+      const migrate = new Migrate(this, this.parse(Seaman))
     }
   }
 }
