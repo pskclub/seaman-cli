@@ -18,7 +18,7 @@ export default class Route {
   }
 
   private runById (): void {
-    exec(`curl -X GET "${CONFIG.STAGING.E_COM_API_ENDPOINT}?id=${this.options.args.options}"`, (e, output, c) => {
+    exec(`curl -X GET "${CONFIG.STAGING.E_COM_API_ENDPOINT}/describe?id=${this.options.args.options}"`, (e, output, c) => {
       this.ctx.log(output)
     })
   }

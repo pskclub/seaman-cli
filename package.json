@@ -10,6 +10,8 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
+    "global": "^4.4.0",
+    "seaman-cli": "^1.0.5",
     "tslib": "^1"
   },
   "devDependencies": {
