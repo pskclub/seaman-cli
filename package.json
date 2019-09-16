@@ -45,6 +45,7 @@
   "repository": "pskclub/seaman-cli",
   "scripts": {
     "dev": "./bin/run",
+    "release": "npm version patch && npm publish && git push",
     "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\""
