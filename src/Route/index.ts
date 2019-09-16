@@ -1,5 +1,6 @@
 import Command from '@oclif/command/lib/command'
 import { exec } from 'child_process'
+import { CONFIG } from '../constants/config'
 
 export default class Route {
   constructor (private ctx: Command, private options: any) {
@@ -11,13 +12,13 @@ export default class Route {
   }
 
   private run (): void {
-    exec(`curl -X GET "https://stg-ecom.pams.ai/describe"`, (e, output, c) => {
+    exec(`curl -X GET "${CONFIG.STAGING.E_COM_API_ENDPOINT}/describe"`, (e, output, c) => {
       this.ctx.log(output)
     })
   }
 
   private runById (): void {
-    exec(`curl -X GET "https://stg-ecom.pams.ai/describe?id=${this.options.args.options}"`, (e, output, c) => {
+    exec(`curl -X GET "${CONFIG.STAGING.E_COM_API_ENDPOINT}?id=${this.options.args.options}"`, (e, output, c) => {
       this.ctx.log(output)
     })
   }
