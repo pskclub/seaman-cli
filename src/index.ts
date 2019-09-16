@@ -1,4 +1,5 @@
 import { Command, flags } from '@oclif/command'
+import Route from './Route'
 import Migrate from './Migrate'
 
 class Seaman extends Command {
@@ -15,11 +16,33 @@ class Seaman extends Command {
     force: flags.boolean({ char: 'f' })
   }
 
-  static args = [{ name: 'migrate' }]
+  static args = [
+    {
+      name: 'context',
+      required: true,
+      options: ['get', 'migrate']
+    },
+    {
+      name: 'get',
+      required: false,
+      description: 'resource',
+      options: ['routes']
+    },
+    {
+      name: 'options',
+      required: false,
+      description: 'options'
+    }]
 
   async run () {
     const { args, flags } = this.parse(Seaman)
-    if (args.migrate) {
+
+    // console.log(args)
+    if (args.context === 'get' && args.get === 'routes') {
+      const route = new Route(this, this.parse(Seaman))
+    }
+
+    if (args.context === 'migrate') {
       const migrate = new Migrate(this, this.parse(Seaman))
     }
   }
