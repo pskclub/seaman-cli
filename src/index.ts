@@ -10,10 +10,10 @@ class Seaman extends Command {
     version: flags.version({ char: 'v' }),
     help: flags.help({ char: 'h' }),
     // flag with a value (-n, --name=VALUE)
-    name: flags.string({ char: 'n', description: 'name to print' }),
-    index: flags.string({ char: 'i' }),
+    namespace: flags.string({ char: 'n', description: 'namespace of env' })
+    // index: flags.string({ char: 'i' }),
     // flag with no value (-f, --force)
-    force: flags.boolean({ char: 'f' })
+    // force: flags.boolean({ char: 'f' })
   }
 
   static args = [
@@ -38,6 +38,7 @@ class Seaman extends Command {
     const { args, flags } = this.parse(Seaman)
 
     // console.log(args)
+    // console.log(flags)
     if (args.context === 'get' && args.get === 'routes') {
       const route = new Route(this, this.parse(Seaman))
     }
