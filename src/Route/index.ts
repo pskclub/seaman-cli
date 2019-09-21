@@ -1,32 +1,15 @@
 import Command from '@oclif/command/lib/command'
 import { exec } from 'child_process'
-import { CONFIG } from '../constants/config'
+import { getBaseAPI } from '../constants/config'
 
 export default class Route {
   endpoint: string = ''
 
   constructor (private ctx: Command, private options: any) {
     if ('namespace' in this.options.flags) {
-      switch (this.options.flags.namespace) {
-        case 'stg':
-          this.endpoint = CONFIG.STAGING.E_COM_API_ENDPOINT
-          break
-        case 'staging':
-          this.endpoint = CONFIG.STAGING.E_COM_API_ENDPOINT
-          break
-        case 'nry':
-          this.endpoint = CONFIG.NARAYA.E_COM_API_ENDPOINT
-          break
-        case 'naraya':
-          this.endpoint = CONFIG.NARAYA.E_COM_API_ENDPOINT
-          break
-      }
-
-      if (!this.endpoint) {
-        this.ctx.log('Namespace is invalid')
-      }
+      this.endpoint = getBaseAPI(this.options.flags.namespace)
     } else {
-      this.endpoint = CONFIG.STAGING.E_COM_API_ENDPOINT
+      this.endpoint = getBaseAPI('stg')
     }
 
     if (this.options.args.options) {

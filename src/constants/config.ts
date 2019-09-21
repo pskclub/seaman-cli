@@ -1,8 +1,3 @@
-export const CONFIG = {
-  STAGING: {
-    E_COM_API_ENDPOINT: 'https://stg-ecom.pams.ai'
-  },
-  NARAYA: {
-    E_COM_API_ENDPOINT: 'https://naraya.pams.ai'
-  }
+export const getBaseAPI = (prefix: string): string => {
+  return `https://${prefix}-ecom.pams.ai`
 }
