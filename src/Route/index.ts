@@ -20,7 +20,7 @@ export default class Route {
   }
 
   private run (): void {
-    exec(`curl -X GET "${this.endpoint}/describe"`, (e, output, c) => {
+    exec(`curl -X GET "${this.endpoint}/describe" | grep -E  "${this.options.flags.type || ''}"`, (e, output, c) => {
       this.ctx.log(output)
     })
   }

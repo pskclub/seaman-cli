@@ -6,11 +6,10 @@ class Seaman extends Command {
   static description = 'describe the command here'
 
   static flags = {
-    // add --version flag to show CLI version
     version: flags.version({ char: 'v' }),
     help: flags.help({ char: 'h' }),
-    // flag with a value (-n, --name=VALUE)
-    namespace: flags.string({ char: 'n', description: 'namespace of env' })
+    namespace: flags.string({ char: 'n', description: 'namespace of env' }) ,
+    type: flags.string({ char: 't', description: 'filter output like grep' })
     // index: flags.string({ char: 'i' }),
     // flag with no value (-f, --force)
     // force: flags.boolean({ char: 'f' })
