@@ -20,7 +20,17 @@ export default class Route {
   }
 
   private run (): void {
-    exec(`curl -X GET "${this.endpoint}/describe" | grep -E  "${this.options.flags.type || ''}"`, (e, output, c) => {
+    const types = ((this.options.flags.type || '').trim()).split(',')
+    let type = ''
+    types.forEach((item: string) => {
+      item = item || ''
+      if (type) {
+        type = item.trim()
+      } else {
+        type = type + '.*' + item.trim()
+      }
+    })
+    exec(`curl -X GET "${this.endpoint}/describe" | grep -E  "${type}"`, (e, output, c) => {
       this.ctx.log(output)
     })
   }

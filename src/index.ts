@@ -8,8 +8,8 @@ class Seaman extends Command {
   static flags = {
     version: flags.version({ char: 'v' }),
     help: flags.help({ char: 'h' }),
-    namespace: flags.string({ char: 'n', description: 'namespace of env' }) ,
-    type: flags.string({ char: 't', description: 'filter output like grep' })
+    namespace: flags.string({ char: 'n', description: 'namespace of env' }),
+    type: flags.string({ char: 't', description: 'filter output like grep example -t backend  OR and filter  -t backend,noti' })
     // index: flags.string({ char: 'i' }),
     // flag with no value (-f, --force)
     // force: flags.boolean({ char: 'f' })
