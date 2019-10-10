@@ -10,6 +10,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
+    "core-worker": "^0.3.5",
     "global": "^4.4.0",
     "seaman-cli": "^1.0.5",
     "tslib": "^1"

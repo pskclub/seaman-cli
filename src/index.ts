@@ -9,7 +9,8 @@ class Seaman extends Command {
     version: flags.version({ char: 'v' }),
     help: flags.help({ char: 'h' }),
     namespace: flags.string({ char: 'n', description: 'namespace of env' }),
-    type: flags.string({ char: 't', description: 'filter output like grep example -t backend  OR and filter  -t backend,noti' })
+    type: flags.string(
+      { char: 't', description: 'filter output like grep example -t backend  OR and filter  -t backend,noti' })
     // index: flags.string({ char: 'i' }),
     // flag with no value (-f, --force)
     // force: flags.boolean({ char: 'f' })
@@ -19,7 +20,7 @@ class Seaman extends Command {
     {
       name: 'context',
       required: true,
-      options: ['get', 'migrate']
+      options: ['get', 'migrate', 'describe']
     },
     {
       name: 'get',
@@ -38,7 +39,7 @@ class Seaman extends Command {
 
     // console.log(args)
     // console.log(flags)
-    if (args.context === 'get' && args.get === 'routes') {
+    if (args.get === 'routes') {
       const route = new Route(this, this.parse(Seaman))
     }
 

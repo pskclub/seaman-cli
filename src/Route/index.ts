@@ -1,6 +1,6 @@
 import Command from '@oclif/command/lib/command'
-import { exec } from 'child_process'
 import { getBaseAPI } from '../constants/config'
+import { Process } from '../utils/process'
 
 export default class Route {
   endpoint: string = ''
@@ -12,7 +12,7 @@ export default class Route {
       this.endpoint = getBaseAPI('stg')
     }
 
-    if (this.options.args.options) {
+    if (this.options.args.context === 'describe') {
       this.runById()
     } else {
       this.run()
@@ -30,15 +30,33 @@ export default class Route {
         type = type + '.*' + item.trim()
       }
     })
-    exec(`curl -X GET "${this.endpoint}/describe" | grep -E  "${type}"`, (e, output, c) => {
-      this.ctx.log(output)
+
+    Process.run(`curl  "${this.endpoint}/api/describe" --stderr - | grep -E  "${type}"`).then((apiRes) => {
+      Process.run(`curl "${this.endpoint}/api/backend/describe" --stderr -  | grep -E  "${type}"`).
+      then((backendRes) => {
+        if (apiRes) {
+          this.ctx.log('-------------------------- USER API --------------------------')
+          this.ctx.log(apiRes)
+        }
+
+        if (backendRes) {
+          this.ctx.log('-------------------------- ADMIN API --------------------------')
+          this.ctx.log(backendRes)
+        }
+      })
     })
   }
 
   private runById (): void {
-    exec(`curl -X GET "${this.endpoint}/describe?id=${this.options.args.options}"`,
-      (e, output, c) => {
+    Process.run(`curl -X GET "${this.endpoint}/api/describe?id=${this.options.args.options}"`).then((output) => {
+      if (output) {
         this.ctx.log(output)
-      })
+      } else {
+        Process.run(`curl -X GET "${this.endpoint}/api/backend/describe?id=${this.options.args.options}"`).
+        then((output) => {
+          if (output) this.ctx.log(output)
+        })
+      }
+    })
   }
 }
