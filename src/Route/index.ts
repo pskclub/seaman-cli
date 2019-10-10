@@ -31,8 +31,8 @@ export default class Route {
       }
     })
 
-    Process.run(`curl  "${this.endpoint}/api/describe" --stderr - | grep -E  "${type}"`).then((apiRes) => {
-      Process.run(`curl "${this.endpoint}/api/backend/describe" --stderr -  | grep -E  "${type}"`).
+    Process.run(`curl  "${this.endpoint}/api/describe" | grep -E  "${type}"`).then((apiRes) => {
+      Process.run(`curl "${this.endpoint}/api/backend/describe" | grep -E  "${type}"`).
       then((backendRes) => {
         if (apiRes) {
           this.ctx.log('-------------------------- USER API --------------------------')
