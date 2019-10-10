@@ -1,6 +1,6 @@
 {
   "name": "seaman-cli",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "author": "Passakon Puttasuwan @pskclub",
   "bin": {
     "seaman": "./bin/run"
